@@ -6,4 +6,6 @@ members = [
     "common",
     "macros",
     "macro_utils",
+    "migration",
+    "migration_macros"
 ]
