@@ -1,8 +1,4 @@
-#[cfg(not(any(feature = "frontend", feature = "backend")))]
-compile_error!("one of features \"frontend\" or \"backend\" must be enabled");
-
-#[cfg(all(feature = "frontend", feature = "backend"))]
-compile_error!("features \"frontend\" and \"backend\" cannot be enabled at the same time");
+pub use command_macros::*;
 
 #[cfg(feature = "frontend")]
 use js_sys::{Function, Promise, Reflect};
@@ -80,7 +76,7 @@ macro_rules! serialize_args {
         {
             let mut arg_map = ::std::collections::HashMap::<String, String>::new();
             $(
-                arg_map.insert(stringify!($arg).to_owned(), ::macro_utils::serialize(&$arg).unwrap());
+                arg_map.insert(stringify!($arg).to_owned(), ::commands::serialize(&$arg).unwrap());
             )*
             arg_map
         }
@@ -91,7 +87,7 @@ macro_rules! serialize_args {
 macro_rules! deserialize_args {
     ( $serialized_args:expr, $( $arg_name:ident: $arg_type:ty ),* ) => {
         $(
-            let $arg_name: $arg_type = ::macro_utils::deserialize($serialized_args.get(stringify!($arg_name)).unwrap()).unwrap();
+            let $arg_name: $arg_type = ::commands::deserialize($serialized_args.get(stringify!($arg_name)).unwrap()).unwrap();
         )*
     };
 }

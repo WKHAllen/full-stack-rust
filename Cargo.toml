@@ -4,8 +4,8 @@ members = [
     "frontend",
     "backend",
     "common",
-    "macros",
-    "macro_utils",
+    "commands",
+    "command_macros",
     "migration",
     "migration_macros"
 ]

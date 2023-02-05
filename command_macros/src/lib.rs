@@ -1,9 +1,3 @@
-#[cfg(not(any(feature = "frontend", feature = "backend")))]
-compile_error!("one of features \"frontend\" or \"backend\" must be enabled");
-
-#[cfg(all(feature = "frontend", feature = "backend"))]
-compile_error!("features \"frontend\" and \"backend\" cannot be enabled at the same time");
-
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::{punctuated::Punctuated, token::Comma, FnArg};
@@ -45,13 +39,13 @@ pub fn command(_attr: TokenStream, item: TokenStream) -> TokenStream {
                 let args = #struct_name {
                     #input_names
                 };
-                let res = ::macro_utils::tauri_command(#name_str, &args).await;
+                let res = ::commands::tauri_command(#name_str, &args).await;
                 res
             }
         }
     } else if cfg!(feature = "backend") {
         quote! {
-            #[::macro_utils::tauri::command(async)]
+            #[::commands::tauri::command(async)]
             #(#attrs)*
             #vis #asyncness fn #name #generics(args: #struct_name) #ret {
                 let #struct_name { #input_names } = args;

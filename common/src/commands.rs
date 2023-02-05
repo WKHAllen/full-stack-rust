@@ -1,4 +1,4 @@
-use macros::command;
+use commands::command;
 
 #[command]
 pub fn say_hi() {

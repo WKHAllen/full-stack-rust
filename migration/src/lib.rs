@@ -1,5 +1,4 @@
-#[macro_use]
-extern crate migration_macros;
+pub use migration_macros::*;
 
 pub mod migrations;
 

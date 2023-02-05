@@ -6,10 +6,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-macros = { path = "../macros", optional = true }
-macro_utils = { path = "../macro_utils", optional = true }
+commands = { path = "../commands", optional = true }
 serde = { version = "1.0", features = ["derive"] }
 
 [features]
-frontend = ["macros/frontend", "macro_utils/frontend"]
-backend = ["macros/backend", "macro_utils/backend"]
+frontend = ["commands/frontend"]
+backend = ["commands/backend"]
