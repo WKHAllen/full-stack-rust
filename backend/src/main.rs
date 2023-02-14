@@ -4,11 +4,14 @@
     windows_subsystem = "windows"
 )]
 
-use common::commands::*;
+mod state;
+
+pub use state::{command, State};
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet, say_hi])
+        .manage(State::default())
+        .invoke_handler(tauri::generate_handler![command])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
