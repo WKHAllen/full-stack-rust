@@ -23,7 +23,7 @@ jobs:
     - name: Add the WASM target
       run: rustup target add wasm32-unknown-unknown
     - name: Install gtk dependency
-      run: apt-get install gir1.2-gtk-3.0 -y
+      run: sudo apt-get install -y gir1.2-gtk-3.0
     - name: Build
       run: cd backend && cargo tauri build --verbose
     - name: Run tests
