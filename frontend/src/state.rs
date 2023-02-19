@@ -1,5 +1,6 @@
 use frontend_macros::FrontendCommands;
 use js_sys::{Function, Promise, Reflect};
+use std::rc::Rc;
 use wasm_bindgen::JsCast;
 use wasm_bindgen_futures::JsFuture;
 use yewdux::prelude::*;
@@ -39,3 +40,7 @@ where
 
 #[derive(Default, Clone, PartialEq, Eq, Store, FrontendCommands)]
 pub struct State;
+
+pub type Store<T> = (Rc<T>, Dispatch<T>);
+
+pub type StoreState = Store<State>;

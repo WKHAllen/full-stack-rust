@@ -8,7 +8,6 @@ edition = "2021"
 [dependencies]
 async-trait = "0.1"
 commands = { path = "../commands" }
-common = { path = "../common" }
 frontend_macros = { path = "../frontend_macros" }
 getrandom = { version = "0.2", default-features = false, features = ["custom"] }
 js-sys = { version = "0.3.60" }

@@ -3,7 +3,6 @@
 members = [
     "frontend",
     "backend",
-    "common",
     "commands",
     "macros",
     "frontend_macros",
