@@ -26,5 +26,7 @@ jobs:
       run: sudo apt-get install -y libwebkit2gtk-4.0-dev build-essential curl wget libssl-dev libgtk-3-dev libayatana-appindicator3-dev librsvg2-dev
     - name: Build
       run: cd backend && cargo tauri build --verbose
+      env:
+        DATABASE_URL: sqlite:assets/test.db
     - name: Run tests
       run: cargo test --verbose -- --nocapture
