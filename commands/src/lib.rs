@@ -5,4 +5,6 @@ pub trait Commands {
     async fn say_hi(&self);
 
     async fn greet(&self, name: String) -> String;
+
+    async fn get_random_quote(&self) -> String;
 }

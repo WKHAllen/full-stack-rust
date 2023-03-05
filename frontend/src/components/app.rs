@@ -1,4 +1,4 @@
-use crate::components::Greeting;
+use crate::components::{Greeting, Quote};
 use yew::prelude::*;
 
 #[function_component]
@@ -17,6 +17,7 @@ pub fn App() -> Html {
             <button {onclick}>{ "+1" }</button>
             <p>{ *counter }</p>
             <Greeting name="Will" fallback={html! {"Fetching greeting..."}} />
+            <Quote />
         </div>
     }
 }
