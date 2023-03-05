@@ -1,20 +1,36 @@
-use crate::state::StoreState;
+use crate::hooks::*;
+use crate::state::State;
 use commands::FrontendCommands;
-use frontend_macros::*;
 use yew::prelude::*;
+use yewdux::prelude::*;
 
-#[async_props]
+#[derive(Properties, PartialEq, Clone)]
 pub struct Props {
     #[prop_or("<unknown>".to_owned())]
     pub name: String,
 }
 
-#[async_function_component]
-pub async fn Greeting(props: &Props, (state, _): StoreState) -> Html {
-    state.say_hi().await;
-    let greeting = state.greet(props.name.clone()).await;
+#[function_component]
+pub fn Greeting(props: &Props) -> Html {
+    let (state1, _) = use_store::<State>();
+    let state2 = state1.clone();
 
-    html! {
-        <p>{greeting.clone()}</p>
+    let name = props.name.clone();
+
+    use_async(
+        async move { Result::<_, ()>::Ok(state1.say_hi().await) },
+        true,
+    );
+    let greeting = use_async(
+        async move { Result::<_, ()>::Ok(state2.greet(name).await) },
+        true,
+    );
+
+    match &*greeting {
+        UseAsyncState::Init | UseAsyncState::Loading(_) => {
+            html! { <p>{ "Fetching greeting..." }</p> }
+        }
+        UseAsyncState::Success(g) => html! { <p>{g}</p> },
+        UseAsyncState::Failure(_) => unreachable!(),
     }
 }

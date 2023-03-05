@@ -1,8 +1,7 @@
+use crate::hooks::*;
 use crate::state::State;
 use commands::FrontendCommands;
 use yew::prelude::*;
-// use yew_hooks::prelude::*;
-use crate::hooks::{use_async, PreviousUseAsyncState, UseAsyncState};
 use yewdux::prelude::*;
 
 #[function_component]

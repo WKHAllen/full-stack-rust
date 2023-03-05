@@ -16,7 +16,7 @@ pub fn App() -> Html {
         <div>
             <button {onclick}>{ "+1" }</button>
             <p>{ *counter }</p>
-            <Greeting name="Will" fallback={html! {"Fetching greeting..."}} />
+            <Greeting name="Will" />
             <Quote />
         </div>
     }

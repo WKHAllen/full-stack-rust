@@ -22,6 +22,7 @@ pub enum UseAsyncState<T, E> {
     Failure(E),
 }
 
+#[allow(unused)]
 impl<T, E> UseAsyncState<T, E> {
     /// Check if the future is loading.
     pub fn loading(&self) -> bool {
@@ -61,6 +62,7 @@ impl<T, E> UseAsyncHandle<T, E> {
     }
 
     /// Update `data` directly.
+    #[allow(unused)]
     pub fn update(&self, data: T) {
         self.inner.set(UseAsyncState::Success(data))
     }
