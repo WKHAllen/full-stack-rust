@@ -1,6 +1,7 @@
 #![forbid(unsafe_code)]
 
 mod components;
+mod hooks;
 mod state;
 
 use components::App;

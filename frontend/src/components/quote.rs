@@ -1,16 +1,17 @@
 use crate::state::State;
 use commands::FrontendCommands;
 use yew::prelude::*;
-use yew_hooks::prelude::*;
+// use yew_hooks::prelude::*;
+use crate::hooks::{use_async, PreviousUseAsyncState, UseAsyncState};
 use yewdux::prelude::*;
 
 #[function_component]
 pub fn Quote() -> Html {
     let (state, _) = use_store::<State>();
 
-    let quote = use_async_with_options(
+    let quote = use_async(
         async move { Result::<_, ()>::Ok(state.get_random_quote().await) },
-        UseAsyncOptions::enable_auto(),
+        true,
     );
 
     let onclick = {
@@ -23,31 +24,18 @@ pub fn Quote() -> Html {
     html! {
         <div>
             {
-                if quote.loading {
-                    html! {
-                        <p>{ "Fetching quote..." }</p>
-                    }
-                } else {
-                    html! {}
+                match &*quote {
+                    UseAsyncState::Init => html! { <p>{ "Initializing..." }</p> },
+                    UseAsyncState::Loading(prev) => match prev {
+                        PreviousUseAsyncState::None => html! { <p>{ "Fetching quote..." }</p> },
+                        PreviousUseAsyncState::Success(data) => html! { <p>{ data }</p> },
+                        PreviousUseAsyncState::Failure(_) => unreachable!(),
+                    },
+                    UseAsyncState::Success(data) => html! { <p>{ data }</p> },
+                    UseAsyncState::Failure(_) => unreachable!(),
                 }
             }
-            {
-                if let Some(data) = &quote.data {
-                    html! {
-                        <p>{ data }</p>
-                    }
-                } else {
-                    html! {}
-                }
-            }
-            // {
-            //     match quote {
-            //         AsyncState::Loading => html! { ... },
-            //         AsyncState::Success(data) => html! { ... },
-            //         AsyncState::Error(err) => html! { ... },
-            //     }
-            // }
-            <button {onclick} disabled={quote.loading}>{ "New quote" }</button>
+            <button {onclick} disabled={quote.loading()}>{ "New quote" }</button>
         </div>
     }
 }
