@@ -4,6 +4,7 @@ use commands::FrontendCommands;
 use yew::prelude::*;
 use yewdux::prelude::*;
 
+/// A random quote from the database, and a button to fetch a new one.
 #[function_component]
 pub fn Quote() -> Html {
     let (state, _) = use_store::<State>();

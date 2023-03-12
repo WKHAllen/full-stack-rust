@@ -1,8 +1,10 @@
 use std::fmt::Display;
 use std::path::PathBuf;
 
+/// The type representing a version segment.
 pub type VersionNumber = u16;
 
+/// Parse a version number from a string.
 pub fn parse_version_from_str(
     version_str: &str,
 ) -> Result<Option<(VersionNumber, VersionNumber, VersionNumber)>, String> {
@@ -28,6 +30,7 @@ pub fn parse_version_from_str(
     }
 }
 
+/// Parse a version number from a file path.
 pub fn parse_version_from_path(
     path: PathBuf,
 ) -> Result<(VersionNumber, VersionNumber, VersionNumber), String> {
@@ -42,10 +45,12 @@ pub fn parse_version_from_path(
     parse_version_from_str(version_str).map(|v| v.unwrap())
 }
 
+/// A representation of an application version.
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Version(VersionNumber, VersionNumber, VersionNumber);
 
 impl Version {
+    /// Get the identifier of a file corresponding to a version migration.
     pub fn file_id(&self) -> String {
         format!("_{}_{}_{}", self.0, self.1, self.2)
     }

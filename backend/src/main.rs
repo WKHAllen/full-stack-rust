@@ -10,6 +10,7 @@ use anyhow::Result;
 use db::Quote;
 pub use state::{command, State};
 
+/// Populate the database with some values and create the backend application state.
 async fn init_state() -> Result<State> {
     let state = State::new().await?;
 
@@ -32,6 +33,7 @@ async fn init_state() -> Result<State> {
     Ok(state)
 }
 
+/// Start the backend Tauri application.
 #[tokio::main]
 async fn main() -> Result<()> {
     let state = init_state().await?;

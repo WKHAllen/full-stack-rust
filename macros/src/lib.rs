@@ -1,7 +1,10 @@
+#![forbid(unsafe_code)]
+
 use proc_macro::TokenStream;
 use quote::{format_ident, quote, ToTokens};
 use syn::{parse_macro_input, ItemTrait, TraitItem};
 
+/// Rewrite the command trait differently for the frontend and backend.
 #[proc_macro_attribute]
 pub fn command_trait(_: TokenStream, item: TokenStream) -> TokenStream {
     let input = parse_macro_input!(item as ItemTrait);
@@ -28,6 +31,7 @@ pub fn command_trait(_: TokenStream, item: TokenStream) -> TokenStream {
     .into()
 }
 
+/// Note the methods on a trait for future use.
 #[proc_macro_attribute]
 pub fn note_trait_methods(_: TokenStream, item: TokenStream) -> TokenStream {
     let input = parse_macro_input!(item as ItemTrait);

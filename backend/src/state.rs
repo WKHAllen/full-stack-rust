@@ -4,11 +4,14 @@ use commands::BackendCommands;
 use db::{Quote, DB};
 use rand::prelude::*;
 
+/// The backend application state.
 pub struct State {
+    /// The backend database.
     pub(crate) db: DB,
 }
 
 impl State {
+    /// Initialize the backend state and connect to the test database.
     pub async fn new() -> Result<Self> {
         let db = DB::open("test").await?;
 

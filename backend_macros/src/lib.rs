@@ -1,8 +1,11 @@
+#![forbid(unsafe_code)]
+
 use commands::BACKENDCOMMANDS_METHODS;
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::{parse_macro_input, punctuated::Punctuated, token::Comma, FnArg, ItemImpl, Signature};
 
+/// Wrap the backend's implementation of application commands in Tauri's command interface.
 #[proc_macro_attribute]
 pub fn backend_commands(_: TokenStream, item: TokenStream) -> TokenStream {
     let input = parse_macro_input!(item as ItemImpl);

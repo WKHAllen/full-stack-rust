@@ -1,6 +1,7 @@
 use crate::components::{Greeting, Quote};
 use yew::prelude::*;
 
+/// The root element of the application.
 #[function_component]
 pub fn App() -> Html {
     let counter = use_state(|| 0);

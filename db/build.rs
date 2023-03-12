@@ -2,6 +2,7 @@ use anyhow::Result;
 use sqlx::{Connection, SqliteConnection};
 use tokio::fs;
 
+/// Initialize the test database on build.
 #[tokio::main]
 async fn main() -> Result<()> {
     let mut test_db_path = project_root::get_project_root()?;

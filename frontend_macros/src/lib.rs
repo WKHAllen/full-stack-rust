@@ -1,8 +1,11 @@
+#![forbid(unsafe_code)]
+
 use commands::FRONTENDCOMMANDS_METHODS;
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::{parse_macro_input, punctuated::Punctuated, token::Comma, FnArg, ItemStruct, Signature};
 
+/// Implement application command methods for the frontend.
 #[proc_macro_derive(FrontendCommands)]
 pub fn derive_frontend_commands(item: TokenStream) -> TokenStream {
     let input = parse_macro_input!(item as ItemStruct);

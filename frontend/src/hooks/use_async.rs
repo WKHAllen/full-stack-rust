@@ -13,7 +13,7 @@ pub enum PreviousUseAsyncState<T, E> {
     Failure(E),
 }
 
-/// State for an async future.
+/// The current state of an async future.
 #[derive(Clone, PartialEq, Eq)]
 pub enum UseAsyncState<T, E> {
     Init,
@@ -95,6 +95,7 @@ where
     }
 }
 
+/// This hook returns state and a `run` callback for an async future.
 #[hook]
 pub fn use_async<F, T, E>(future: F, run_on_init: bool) -> UseAsyncHandle<T, E>
 where

@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 mod db;
 mod id;
 mod quote;
@@ -6,6 +8,7 @@ pub use crate::db::*;
 pub use crate::id::*;
 pub use crate::quote::*;
 
+/// Test the database quote functions.
 #[tokio::test]
 async fn test_quote() {
     let db = DB::open("test").await.unwrap();

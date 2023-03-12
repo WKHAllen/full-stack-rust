@@ -4,12 +4,15 @@ use commands::FrontendCommands;
 use yew::prelude::*;
 use yewdux::prelude::*;
 
+/// Greeting properties.
 #[derive(Properties, PartialEq, Clone)]
 pub struct Props {
+    /// The name of the person to greet.
     #[prop_or("<unknown>".to_owned())]
     pub name: String,
 }
 
+/// A personal greeting.
 #[function_component]
 pub fn Greeting(props: &Props) -> Html {
     let (state1, _) = use_store::<State>();

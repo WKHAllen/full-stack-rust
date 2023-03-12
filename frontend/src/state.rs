@@ -4,12 +4,16 @@ use wasm_bindgen::JsCast;
 use wasm_bindgen_futures::JsFuture;
 use yewdux::prelude::*;
 
+/// Arguments passed to the backend Tauri command.
 #[derive(serde::Serialize)]
 struct CommandArgs {
+    /// The name of the command.
     name: String,
+    /// A string representation of the serialized command arguments.
     args: String,
 }
 
+/// Invoke the backend command and return the response.
 async fn tauri_command<S, R>(command: &str, args: &S) -> R
 where
     S: serde::ser::Serialize + ?Sized,
@@ -37,5 +41,6 @@ where
     res
 }
 
+/// The frontend application state.
 #[derive(Default, Clone, PartialEq, Eq, Store, FrontendCommands)]
 pub struct State;

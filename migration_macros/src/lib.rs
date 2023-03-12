@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 mod version;
 
 use proc_macro::TokenStream;
@@ -6,6 +8,7 @@ use std::fs;
 use syn::{punctuated::Punctuated, token::Comma, Expr};
 use version::*;
 
+/// Migrate from one application version to another.
 #[proc_macro]
 pub fn migrate_from(item: TokenStream) -> TokenStream {
     let input = syn::parse_macro_input!(item with Punctuated::<Expr, Comma>::parse_terminated)
